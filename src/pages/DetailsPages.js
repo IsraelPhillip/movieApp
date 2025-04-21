@@ -1,5 +1,5 @@
 import moment from 'moment/moment'
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import {  useParams } from 'react-router-dom'
 import Divider from '../components/Divider'
@@ -7,6 +7,7 @@ import useFetchDetails from '../hooks/useFetchDetails'
 import useFetch from '../hooks/useFetch'
 
 import HorizontalScrollCard from '../components/HorizontalScrollCard'
+import VideoPlay from '../components/VideoPlay'
 
 
 const DetailsPages = () => {
@@ -17,8 +18,13 @@ const DetailsPages = () => {
   const { data: castData } = useFetchDetails(`/${params?.explore}/${params?.id}/credits`)
   const { data: similarData } = useFetch(`/${params?.explore}/${params?.id}/similar`)
   const { data: recommendations } = useFetch(`/${params?.explore}/${params?.id}/recommendations`)
+  const [playVideo,setPlayVideo] = useState(false)
+  const [playVideoId, setPlayVideoId] = useState('')
 
-
+const handlePlayVideo = (data)=>{
+  setPlayVideoId(data)
+  setPlayVideo(true)
+}
 
   const writingRoles = ['Writer', 'Screenplay', 'Story', 'Short Story', 'Screenstory'];
 
@@ -78,7 +84,9 @@ const directorName = directorObj?.name || 'Unknown';
               className='h-80 w-60 object-cover rounded'
               alt='Poster'
             />
+            
           )}
+          <button onClick={()=>handlePlayVideo(data)} className='mt-3 w-full py-2 px-4 text-center bg-white text-black font-bold rounded text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all'>Play Now</button>
         </div>
 
         {/* Info */}
@@ -147,7 +155,7 @@ const directorName = directorObj?.name || 'Unknown';
               <h2 className='font-bold text-lg'>Cast</h2>
               <div className='grid grid-cols-[repeat(auto-fit,96px)] gap-5'>
           {
-            castData.cast?.filter(el => el?.profile_path).map((cast,index)=>{
+            castData?.cast?.filter(el => el?.profile_path).map((cast,index)=>{
               return (
                 <div>
                   <div>
@@ -173,6 +181,14 @@ const directorName = directorObj?.name || 'Unknown';
             <HorizontalScrollCard data={recommendations} heading={'Recommended'+params?.explore} media_type={params?.explore} />
 
           </div>
+          {
+            playVideo && (
+              <VideoPlay data={playVideoId} close={()=>setPlayVideo(false)} media_type={params?.explore} />
+
+            )
+          }
+
+
     </div>
   )
 }
