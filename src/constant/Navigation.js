@@ -7,27 +7,27 @@ export const Navigation = [
     {
         label: 'TV Shows',
         href: 'tv',
-        icon: <PiTelevisionFill/>
+        icon: <PiTelevisionFill />
     },
     {
         label: 'Movies',
         href: 'movie',
-        icon: <BiSolidMoviePlay/>
+        icon: <BiSolidMoviePlay />
     }
-]
+];
 
-export const MobileNavigation =[
+export const MobileNavigation = [
     {
         label: 'Home',
         href: '/',
-        Icon: <MdHomeFilled/>
+        icon: <MdHomeFilled />
     },
     ...Navigation,
     {
-        label:'Search',
-        href:'/search',
-        icon:<IoSearchOutline/>
+        label: 'Search',
+        href: '/search',
+        icon: <IoSearchOutline />
     }
-]
+];
 
-export default Navigation
+export default Navigation;

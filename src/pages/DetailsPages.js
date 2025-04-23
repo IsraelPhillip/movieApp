@@ -121,7 +121,7 @@ const directorName = directorObj?.name || 'Unknown';
           </div>
           <Divider/>
           <div>
-            <h3 className='text-xl text-white font-bold mb-1 mt-2'>Oveview</h3>
+            <h3 className='text-xl text-white font-bold mb-1 mt-2'>Overview</h3>
             <p> {data.overview} </p>
             <Divider/>
             <div className='flex items-center gap-3 text-center my-3'>
